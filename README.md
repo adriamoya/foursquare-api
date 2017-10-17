@@ -8,7 +8,7 @@ Store the `CLIENT_ID`, `CLIENT_SECRET` and `REDIRECT_URL`.
 
 # Installation
 
-Use the [foursquare python library](https://github.com/mLewisLogic/foursquare) to get access and query the API.
+Leveraging the [foursquare python library](https://github.com/mLewisLogic/foursquare) to get access and query the API.
 
 ```shell
 pip install foursquare
