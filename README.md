@@ -28,6 +28,7 @@ Direct users to Foursquare with your registered redirect uri.
 
 # Using built-in python requests:
 
+import re
 import requests
 import urllib
 from app_info import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
@@ -39,6 +40,8 @@ auth_uri = 'https://foursquare.com/oauth2/authenticate?client_id=%s&response_typ
 r = requests.get(auth_uri)
 
 # Using the foursquare library
+
+import foursquare
 
 client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
 auth_uri = client.oauth.auth_url()
