@@ -28,20 +28,20 @@ Direct users to Foursquare with your registered redirect uri.
 
 # Using built-in python requests:
 
-	import requests
-	import urllib
-	from app_info import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
+import requests
+import urllib
+from app_info import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 
-	redirect_uri = urllib.quote(REDIRECT_URI)
+redirect_uri = urllib.quote(REDIRECT_URI)
 
-	auth_uri = 'https://foursquare.com/oauth2/authenticate?client_id=%s&response_type=code&redirect_uri=%s' % (CLIENT_ID, redirect_uri)
+auth_uri = 'https://foursquare.com/oauth2/authenticate?client_id=%s&response_type=code&redirect_uri=%s' % (CLIENT_ID, redirect_uri)
 
-	r = requests.get(auth_uri)
+r = requests.get(auth_uri)
 
 # Using the foursquare library
 
-	client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
-	auth_uri = client.oauth.auth_url()
+client = foursquare.Foursquare(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
+auth_uri = client.oauth.auth_url()
 
 ```
 ### Step 2
@@ -53,7 +53,7 @@ If the user accepts, they will be redirected back to your URI with a code.
 # Manually go to the auth_uri, allow access and save the code from the redirect url.
 # The following expression extracts the code from the redirect url.
 
-	CODE = re.findall('\/\?code=([A-Z0-9]+)',response_url)[0]
+CODE = re.findall('\/\?code=([A-Z0-9]+)',response_url)[0]
 
 ```
 
@@ -67,15 +67,15 @@ Your server should exchange the code it got in step 2 for an access token.
 
 # Using built-in python requests:
 
-	token_url = 'https://foursquare.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s' % (CLIENT_ID, CLIENT_SECRET, redirect_uri, CODE)
+token_url = 'https://foursquare.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s' % (CLIENT_ID, CLIENT_SECRET, redirect_uri, CODE)
 
 # Using the foursquare library
 
-	# Interrogate foursquare's servers to get the user's access_token
-	access_token = client.oauth.get_token(CODE)
+# Interrogate foursquare's servers to get the user's access_token
+access_token = client.oauth.get_token(CODE)
 
-	# Apply the returned access token to the client
-	client.set_access_token(access_token)
+# Apply the returned access token to the client
+client.set_access_token(access_token)
 ```
 
 # Querying
